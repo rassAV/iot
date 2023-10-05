@@ -1,12 +1,8 @@
-#pip install pyserial
 import serial
 import time
 import time
 import paho.mqtt.client as paho
 import random
-
-
-
 
 broker = 'broker.emqx.io'
 
@@ -25,7 +21,6 @@ def send_command(cmd: str, response_len: int) -> str:
         str_resp = resp.decode()
     return str_resp
 
-
 def on_message(client, userdata, message):
     time.sleep(1)
     data = str(message.payload.decode("utf-8"))
@@ -33,7 +28,6 @@ def on_message(client, userdata, message):
 
 client = paho.Client('client-isu-rassoha')
 client.on_message = on_message
-
 
 client.connect(broker)
 client.loop_start()
