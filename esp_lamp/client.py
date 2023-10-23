@@ -17,15 +17,14 @@ client.connect(broker)
 brightness_time = 40
 
 while True:
-    state = "d"  # Предполагаем, что начинаем с увеличением времени свечения
+    state = "d"
     client.publish("esp8266-ds1/command", state)
     print(f"publish state is {state}")
-    time.sleep(brightness_time)  # Ждем заданное время свечения
+    time.sleep(brightness_time)
 
-    # Уменьшаем время свечения на 1 секунду, но не менее минимального времени
     brightness_time = max(min_brightness_time, brightness_time - 1)
 
-    state = "u"  # После времени свечения переключаемся на уменьшение
+    state = "u"
     client.publish("esp8266-ds1/command", state)
     print(f"publish state is {state}")
-    time.sleep(60 - brightness_time)  # Ждем до конца минуты минус время свечения
+    time.sleep(60 - brightness_time)
