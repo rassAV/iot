@@ -15,16 +15,19 @@ client.on_connect = on_connect
 client.connect(broker)
 
 brightness_time = 40
+state = "c"
+
+print("Enter topic of microprocessor:")
+topic = str(input())
+print("States publishing...")
 
 while True:
-    state = "d"
-    client.publish("esp8266-ds1/command", state)
+    client.publish(topic, state)
     print(f"publish state is {state}")
     time.sleep(brightness_time)
 
     brightness_time = max(min_brightness_time, brightness_time - 1)
 
-    state = "u"
-    client.publish("esp8266-ds1/command", state)
+    client.publish(topic, state)
     print(f"publish state is {state}")
     time.sleep(60 - brightness_time)
